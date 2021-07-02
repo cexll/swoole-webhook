@@ -31,7 +31,6 @@ composer create-project cexll/swoole-webhook
 * `mode`：启动模式 `SWOOLE_BASE/SWOOLE_PROCESS`
 * `settings`：Server的配置
 
-> 正式运行时需要启动守护进程
 
 ```json
 "server": {
@@ -63,7 +62,7 @@ composer create-project cexll/swoole-webhook
         "ref": "refs/heads/master",
         "hook_name": "push",
         "cmds": [
-          "git -C /yourpath/git-deploy pull"
+          "git -C /yourpath/project pull"
         ]
       }
   },
@@ -73,7 +72,7 @@ composer create-project cexll/swoole-webhook
         "ref": "refs/heads/master",
         "hook_name": "push_hooks",
         "cmds": [
-          "git -C /yourpath/git-deploy pull"
+          "git -C /yourpath/project pull"
         ]
       }
   }
