@@ -1,0 +1,28 @@
+#!/bin/bash
+
+serviceName="webhook"
+
+__DIR__=$(cd `dirname $0`; pwd)
+
+install(){
+    echo "[Unit]
+Description=$serviceName
+After=network.target
+After=syslog.target
+
+[Service]
+Type=simple
+LimitNOFILE=65535
+ExecStart=/usr/bin/php $__DIR__/../run.php
+ExecReload=/bin/kill -USR1 \$MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target graphical.target
+" > /etc/systemd/system/$serviceName.service
+
+    systemctl enable $serviceName
+    systemctl start $serviceName
+}
+
+install

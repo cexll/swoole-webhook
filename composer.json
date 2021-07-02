@@ -1,0 +1,16 @@
+{
+  "name": "cexll/swoole-webhook",
+  "description": "Using WebHooks to automatically pull code",
+  "license": "Apache 2.0",
+  "type": "project",
+  "keywords": [
+    "php",
+    "swoole",
+    "webhook"
+  ],
+  "require": {
+    "php": ">=7.2",
+    "ext-json": "*",
+    "swoole/ide-helper": "@dev"
+  }
+}

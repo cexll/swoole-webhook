@@ -1,0 +1,36 @@
+{
+    "server": {
+        "ip": "0.0.0.0",
+        "port": 19501,
+        "mode": 1,
+        "setting": {
+            "worker_num": 1,
+            "task_worker_num": 1,
+            "task_enable_coroutine": true
+        }
+    },
+    "sites": {
+        "gitee": [
+            {
+                "name": "cexll/swoole-webhook",
+                "password": "密码",
+                "ref": "refs/heads/master",
+                "hook_name": "push_hooks",
+                "cmds": [
+                    "git -C /yourpath/project pull"
+                ]
+            }
+        ],
+        "github": [
+            {
+                "name": "cexll/swoole-webhook",
+                "password": "密码",
+                "ref": "refs/heads/master",
+                "hook_name": "push",
+                "cmds": [
+                    "git -C /yourpath/project pull"
+                ]
+            }
+        ]
+    }
+}
