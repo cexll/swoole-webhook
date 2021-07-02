@@ -16,9 +16,6 @@ class run
     /** @var swoole_http_request */
     protected $server;
 
-    /** @var int */
-    protected $port;
-
     /** @var array */
     protected $config;
 
