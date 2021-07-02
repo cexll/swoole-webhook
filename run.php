@@ -166,7 +166,7 @@ class run
                 'method' => $request->getMethod(),
                 'host' => $request->header['host'],
                 'url' => $request->server['path_info'],
-                'ip' => $request->server['remote_addr'],
+                'ip' => $request->header['x-real-ip'],
                 'data' => $request->rawcontent(),
             ]) . PHP_EOL, FILE_APPEND);
     }
