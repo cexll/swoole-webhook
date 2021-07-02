@@ -28,6 +28,9 @@ class run
         $this->config = self::getConfig();
         $this->server = new swoole_http_server($this->config['server']['ip'], $this->config['server']['port'], $this->config['server']['mode']);
         if (isset($this->config['server']['setting'])) {
+            if (array_key_exists('daemonize', $this->config['server']['setting']) && $this->config['server']['setting']['daemonize'] === 1) {
+                $this->config['server']['setting']['pid_file'] = __DIR__ . '/server.pid';
+            }
             $this->server->set($this->config['server']['setting']);
         }
         $this->server->on('request', function (swoole_http_request $request, swoole_http_response $response) {
