@@ -14,10 +14,10 @@ require __DIR__ . '/vendor/autoload.php';
 class run
 {
     /** @var swoole_http_request */
-    protected  $server;
+    protected $server;
 
     /** @var int */
-    protected  $port;
+    protected $port;
 
     /** @var array */
     protected $config;
@@ -170,6 +170,7 @@ class run
                 'data' => $request->rawcontent(),
             ]) . PHP_EOL, FILE_APPEND);
     }
+
     public static function getConfig()
     {
         return json_decode(file_get_contents(__DIR__ . '/config.json'), true);
