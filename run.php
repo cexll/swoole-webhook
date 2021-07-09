@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -163,12 +164,13 @@ class run
     public function log(swoole_http_request $request): void
     {
         @file_put_contents(__DIR__ . '/http.log', json_encode([
-                'method' => $request->getMethod(),
-                'host' => $request->header['host'],
-                'url' => $request->server['path_info'],
-                'ip' => $request->header['x-real-ip'],
-                'data' => $request->rawcontent(),
-            ]) . PHP_EOL, FILE_APPEND);
+            'date' => date('Y-m-d H:i:s'),
+            'method' => $request->getMethod(),
+            'host' => $request->header['host'],
+            'url' => $request->server['path_info'],
+            'ip' => $request->header['x-real-ip'],
+            'data' => $request->rawcontent(),
+        ], JSON_UNESCAPED_UNICODE) . PHP_EOL, FILE_APPEND);
     }
 
     public static function getConfig()
