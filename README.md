@@ -38,29 +38,30 @@ composer create-project cexll/swoole-webhook
 "server": {
     "ip": "0.0.0.0",
     "port": 19501,
-    "mode": 1,
+    "mode": 1, // SWOOLE_BASE=1, SWOOLE_PROCESS=2
     "setting": {
         "worker_num": 1,
         "task_worker_num": 1,
         "task_enable_coroutine": true,
-        "daemonize": 1
+        "daemonize": 1 // 后台运行
     }
 },
 ```
 
 `sites`对应的是项目的仓库等信息
 
-分为`github`和`gitee`，`key`是仓库名称，支持多个仓库。
+分为`github`和`gitee`，`name`是仓库名称，支持多个仓库。
 
 * `secret`/`password`：密钥/密码；`github`使用`secret`，`gitee`的 WebHook 密码使用`password`，签名密钥使用`secret`
 * `ref`：分支
 * `hook_name`：事件名称；`github`为`push`，`gitee`为`push_hooks`
-* `cmds`：需要执行的脚本
+* `cmds`：需要执行的脚本/命令
 
 ```json
 "sites": {
-  "github": {
-      "cexll/swoole-webhook": {
+  "github": [
+    {
+        "name": "cexll/swoole-webhook",
         "secret": "password",
         "ref": "refs/heads/master",
         "hook_name": "push",
@@ -68,9 +69,10 @@ composer create-project cexll/swoole-webhook
           "git -C /yourpath/project pull"
         ]
       }
-  },
-  "gitee": {
-      "cexll/swoole-webhook": {
+  ],
+  "gitee": [
+      {
+        "name":"cexll/swoole-webhook",
         "password": "password",
         "ref": "refs/heads/master",
         "hook_name": "push_hooks",
@@ -78,7 +80,7 @@ composer create-project cexll/swoole-webhook
           "git -C /yourpath/project pull"
         ]
       }
-  }
+  ]
 }
 ```
 
