@@ -36,16 +36,16 @@ composer create-project cexll/swoole-webhook
 
 ```json
 "server": {
-    "ip": "0.0.0.0",
-    "port": 19501,
-    "mode": 1, // SWOOLE_BASE=1, SWOOLE_PROCESS=2
-    "setting": {
-        "worker_num": 1,
-        "task_worker_num": 1,
-        "task_enable_coroutine": true,
-        "daemonize": 1 // 后台运行
-    }
-},
+	"ip": "0.0.0.0",
+	"port": 19501,
+	"mode": 1, // SWOOLE_BASE=1, SWOOLE_PROCESS=2
+	"setting": {
+		"worker_num": 1,
+		"task_worker_num": 1,
+		"task_enable_coroutine": true,
+		"daemonize": 1 // 后台运行
+	}
+}
 ```
 
 `sites`对应的是项目的仓库等信息
@@ -59,28 +59,24 @@ composer create-project cexll/swoole-webhook
 
 ```json
 "sites": {
-  "github": [
-    {
-        "name": "cexll/swoole-webhook",
-        "secret": "password",
-        "ref": "refs/heads/master",
-        "hook_name": "push",
-        "cmds": [
-          "git -C /yourpath/project pull"
-        ]
-      }
-  ],
-  "gitee": [
-      {
-        "name":"cexll/swoole-webhook",
-        "password": "password",
-        "ref": "refs/heads/master",
-        "hook_name": "push_hooks",
-        "cmds": [
-          "git -C /yourpath/project pull"
-        ]
-      }
-  ]
+	"github": [{
+		"name": "cexll/swoole-webhook",
+		"secret": "password",
+		"ref": "refs/heads/master",
+		"hook_name": "push",
+		"cmds": [
+			"git -C /yourpath/project pull"
+		]
+	}],
+	"gitee": [{
+		"name": "cexll/swoole-webhook",
+		"password": "password",
+		"ref": "refs/heads/master",
+		"hook_name": "push_hooks",
+		"cmds": [
+			"git -C /yourpath/project pull"
+		]
+	}]
 }
 ```
 
