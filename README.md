@@ -9,21 +9,34 @@ Using WebHooks to automatically pull code
 * [x] GitHub
 * [x] Gitee
 
-## 依赖
+## Require
 
 * php >= 7.2
 * ext-swoole >= 4.5
 
-## 安装
+## Install
 
 ```shell
 composer create-project cexll/swoole-webhook
 ```
 
-## 配置
+## Configure
 
-1. 修改配置文件`config.json`
+1. vim `config.json`
 
+```json
+"server": {
+	"ip": "0.0.0.0",
+	"port": 19501,
+	"mode": 1,  // SWOOLE_BASE=1, SWOOLE_PROCESS=2
+	"setting": {
+		"worker_num": 1,
+		"task_worker_num": 1,
+		"task_enable_coroutine": true,
+		"daemonize": true // 后台运行
+	}
+}
+```
 `server`对应的是`Swoole\Http\Server`的相关配置
 
 * `ip`：IP地址
@@ -34,21 +47,9 @@ composer create-project cexll/swoole-webhook
 > 设置 daemonize => true 时，程序将转入后台作为守护进程运行。长时间运行的服务器端程序必须启用此项。
 如果不启用守护进程，当 ssh 终端退出后，程序将被终止运行。
 
-```json
-"server": {
-	"ip": "0.0.0.0",
-	"port": 19501,
-	"mode": 1, // SWOOLE_BASE=1, SWOOLE_PROCESS=2
-	"setting": {
-		"worker_num": 1,
-		"task_worker_num": 1,
-		"task_enable_coroutine": true,
-		"daemonize": 1 // 后台运行
-	}
-}
-```
 
-`sites`对应的是项目的仓库等信息
+
+2. `sites`对应的是项目的仓库等信息
 
 分为`github`和`gitee`，`name`是仓库名称，支持多个仓库。
 
@@ -80,14 +81,17 @@ composer create-project cexll/swoole-webhook
 }
 ```
 
-2. 填写WebHook
+3. 填写WebHook
 
 URL：`http://ip:port/github` or `http://ip:port/gitee`
 
 Secret/PassWord：对应`config.json`中的`secret/password`
 
-## 启动
+## Start
 
 ```shell
 php run.php
 ```
+
+# License
+Apache License Version 2.0, http://www.apache.org/licenses/
