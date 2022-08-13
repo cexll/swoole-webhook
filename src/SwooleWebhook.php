@@ -59,10 +59,6 @@ class SwooleWebhook
                 $response->end('Not Found');
                 return;
             }
-            Context::put('config', self::getConfig());
-            \Swoole\Coroutine::defer(static function () {
-                Context::delete('config');
-            });
             switch ($request->server['request_uri']) {
                 case '/gitee':
                     $this->server->task([
@@ -91,7 +87,8 @@ class SwooleWebhook
     public function parseGitee($data): void
     {
         $data['data'] = json_decode($data['data'], true);
-        foreach (Context::get('config')['sites']['gitee'] as $item) {
+        $config = self::getConfig();
+        foreach ($config['sites']['gitee'] as $item) {
             if (isset($item['name']) && $item['name'] !== $data['data']['project']['path_with_namespace']) {
                 continue;
             }
@@ -120,12 +117,13 @@ class SwooleWebhook
     {
         $rawData = $data['data'];
         $data['data'] = json_decode($data['data'], true);
-        foreach (Context::get('config')['sites']['github'] as $item) {
+        $config = self::getConfig();
+        foreach ($config['sites']['github'] as $item) {
             if (isset($item['name']) && $item['name'] !== $data['data']['repository']['full_name']) {
                 continue;
             }
             if (isset($item['password'])) {
-                [$algo, $hash] = explode('=', $data['header']['x-hub-signature']);
+                [$algo, $hash] = explode('=', $data['header']['x-hub-signature-256']);
                 $myHash = hash_hmac($algo, $rawData, $item['password']);
                 if ($hash !== $myHash) {
                     continue;
