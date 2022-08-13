@@ -12,5 +12,10 @@
     "php": ">=7.2",
     "ext-json": "*",
     "swoole/ide-helper": "@dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Cexll\\Swoole\\Webhook\\": "src/"
+    }
   }
 }
