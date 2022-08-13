@@ -16,7 +16,7 @@ Using WebHooks to automatically pull code
 
 ## Install
 
-```shell
+```bash
 composer create-project cexll/swoole-webhook
 ```
 
@@ -27,7 +27,7 @@ composer create-project cexll/swoole-webhook
 ```json
 "server": {
 	"ip": "0.0.0.0",
-	"port": 19501,
+	"port": 9501,
 	"mode": 1,  // SWOOLE_BASE=1, SWOOLE_PROCESS=2
 	"setting": {
 		"worker_num": 1,
